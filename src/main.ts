@@ -5,6 +5,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import express from 'express'; // ✅ Ensure correct import
 import { ConfigService } from '@nestjs/config';
+import { hostname } from 'os';
 
 async function bootstrap() {
   const server = express(); // ✅ Use correct syntax
@@ -31,7 +32,7 @@ async function bootstrap() {
   });
   SwaggerModule.setup('api/docs', app, document);
 
-  await app.listen(port).then(()=>console.log(`App is working on http://localhost:${port}`))
+  await app.listen(port,hostname:'0.0.0.0').then(()=>console.log(`App is working on http://localhost:${port}`))
 }
 
 bootstrap();

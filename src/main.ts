@@ -4,10 +4,14 @@ import { JwtAuthGuard } from './auth/guards/jwt.guard';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import express from 'express'; // ✅ Ensure correct import
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const server = express(); // ✅ Use correct syntax
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
+
+  const configService = app.get(ConfigService);
+  const port = configService.get<number>('PORT') || 3000; // Default to 3000 if not set
 
   // Enable JWT Auth Guard globally
   app.useGlobalGuards(new JwtAuthGuard());
@@ -27,7 +31,7 @@ async function bootstrap() {
   });
   SwaggerModule.setup('api/docs', app, document);
 
-  await app.listen(3000).then(()=>console.log('App is working on 3000'))
+  await app.listen(port).then(()=>console.log(`App is working on http://localhost:${port}`))
 }
 
 bootstrap();

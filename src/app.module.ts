@@ -9,6 +9,7 @@ import { DeviceLocDetailsModule } from './deviceLocDetails/deviceLocDetails.modu
 import { RequestedCounsellarModule } from './requested-counsellar/requested-counsellar.module';
 import { RedisModule } from './redis/redis.module';
 import { BlogModule } from './blog/blog.module';
+import { v4 as uuidv4 } from 'uuid';
 
 @Module({
   imports: [
@@ -26,8 +27,14 @@ import { BlogModule } from './blog/blog.module';
         autoLoadEntities: true,
         synchronize: true,
         logging: true,
-        entities: [__dirname + "/**/*.entity{.ts,.js}"]
+        entities: [__dirname + "/**/*.entity{.ts,.js}"],
+        uuidExtension: 'uuid-ossp',
+        extra: {
+            generateUuid: () => uuidv4(),
+          },
       }),
+
+      
     }),
     UserModule,
     AuthModule,

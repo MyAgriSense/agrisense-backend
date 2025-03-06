@@ -5,7 +5,6 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import express from 'express'; // ✅ Ensure correct import
 import { ConfigService } from '@nestjs/config';
-import { hostname } from 'os';
 
 async function bootstrap() {
   const server = express(); // ✅ Use correct syntax

@@ -32,7 +32,9 @@ async function bootstrap() {
   });
   SwaggerModule.setup('api/docs', app, document);
 
-  await app.listen(port,hostname:'0.0.0.0').then(()=>console.log(`App is working on http://localhost:${port}`))
+  await app.listen(port, '0.0.0.0').then(() => 
+    console.log(`App is working on http://localhost:${port}`)
+  );
 }
 
 bootstrap();
